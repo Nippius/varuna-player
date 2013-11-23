@@ -11,24 +11,24 @@ PREFIX_ARM = arm-none-eabi
 # Microcontroller properties
 #==============================================================================
 
-#old part number for stelarisware
-#PART = LM4F120H5QR
-#New part number for TivaWare 
+# old part number for stelarisware
+# PART = LM4F120H5QR
+# New part number for TivaWare 
 PART = TM4C1233H6PM
 CPU = -mcpu=cortex-m4
 FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 # To use hardware FPU, the stellarisware lib must be built using hard FP also! (see makedefs)
-#FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=hard
-#Note:
-#hard = Use hardware floating point
-#softfp = Use hardware floating point but use normal register, calling conventions, etc
-#soft = Use software for floating point operations
+# FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+# Note:
+# hard = Use hardware floating point
+# softfp = Use hardware floating point but use normal register, calling conventions, etc
+# soft = Use software for floating point operations
 
 #==============================================================================
 # Librarys
 #==============================================================================
 
-#MP3PlayerLib path
+# MP3PlayerLib path
 MP3PLIB_PATH = mp3plib/
 
 # TivaCware path
@@ -108,7 +108,7 @@ OBJS = $(SRC:.c=.o)
 #                      Rules to make the target
 #==============================================================================
 
-#make all rule
+# make all rule
 all: $(OBJS) ${PROJECT_NAME}.axf ${PROJECT_NAME}
 
 %.o: %.c
