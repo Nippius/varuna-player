@@ -41,7 +41,7 @@ void UART_Init()
 }
 
 /*
-VER COMO FUNCIONA ESTA LIB!
+ESTUDAR COMO FUNCIONA ESTA LIB!
 */
 
 //*****************************************************************************
@@ -151,7 +151,7 @@ int main()
 	LCD_Fill(BLACK);
 	
 	LCD_Text(VERSION,35, 20, 16, GREEN, BLACK);
-	//LCD_Dot(10,10,BLACK);
+
 	CHRONO_Delay_1ms(1000);
 	
 	//dot_test();
