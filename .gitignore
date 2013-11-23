@@ -16,3 +16,9 @@
 *.exe
 *.out
 *.app
+
+# Others
+*.d
+*.axf
+*.bin
+*.lst
