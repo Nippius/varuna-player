@@ -1,4 +1,4 @@
-/Tiva-C
+//Tiva-C
 #include <stdint.h>
 #include <stdbool.h>
 #include "inc/hw_types.h"
