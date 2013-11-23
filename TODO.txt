@@ -1,0 +1,11 @@
+TODO:
+-----
+
+->Add an interrupt so that we update the lcd screen every 40ms so that we get 25fps
+->Make the UART stdio work...
+->Change project from C to C++
+->Read "Stellaris Graphics Library Display Drivers" and read "Stellaris LaunchPad Workbook" (starting at lab 10 page 187), to 
+	learn how to use the Graphics Library provided by TI so that i can use it to build the GUI more easily.
+	Note: the display driver is just a module/class that exposes a predefined set of functions (specified by
+		the grlib) that allows the grlib to interface with the lcd. Basically it is a bridge between the grlib
+		and the LCD display. It is the driver that knows how to comunicate with the LCD.

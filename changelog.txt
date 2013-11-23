@@ -1,0 +1,9 @@
+Varuna MP3 Player changelog:
+
+--0.01
+	->Initial version.
+	->Uses shift registers to send data to the LCD display.
+
+--0.02
+	->Switched to a parallel interface since shift registers tend to be slow
+	->
