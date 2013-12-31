@@ -16,15 +16,15 @@
 
 #define VERSION "0.02"
 
-void UART_Init()
+/* void UART_Init()
 {
-	/*
-		Os pinos da UART0 são partilhados com o ICDI. Em teoria, o ICDI deveria fazer match á frequencia da UART
-		colocada aqui mas pelos vistos não é esse o caso. 
-		Tenho 2 possíveis soluções para o problema dos caracteres marados. Ou meto um delay(1000) algures antes
-		de usar a UART pela primeira vez (mas depois de configurada), ou então tento usar a UART1 a ver se dá
-		para comunicar com o putty.
-	*/
+	
+	// Os pinos da UART0 são partilhados com o ICDI. Em teoria, o ICDI deveria fazer match á frequencia da UART
+	// colocada aqui mas pelos vistos não é esse o caso. 
+	// Tenho 2 possíveis soluções para o problema dos caracteres marados. Ou meto um delay(1000) algures antes
+	// de usar a UART pela primeira vez (mas depois de configurada), ou então tento usar a UART1 a ver se dá
+	// para comunicar com o putty.
+	
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
     GPIOPinConfigure(GPIO_PA0_U0RX);
     GPIOPinConfigure(GPIO_PA1_U0TX);
@@ -38,11 +38,7 @@ void UART_Init()
 	//UARTStdioInit(0);
     UARTprintf("Welcome to the Varuna MP3 Player v0.2 Project!\n");
 	UARTprintf("----------------------------------------------\n\n");
-}
-
-/*
-ESTUDAR COMO FUNCIONA ESTA LIB!
-*/
+} */
 
 //*****************************************************************************
 //
@@ -51,7 +47,7 @@ ESTUDAR COMO FUNCIONA ESTA LIB!
 // seconds are guaranteed, along with the remainder of the current second).
 //
 //*****************************************************************************
-void
+/* void
 Delay(uint32_t ui32Seconds)
 {
     //
@@ -73,7 +69,7 @@ Delay(uint32_t ui32Seconds)
         {
         }
     }
-}
+} */
 
 
 void dot_test()
