@@ -7,6 +7,7 @@
 #include "driverlib/pin_map.h"
 #include "driverlib/gpio.h"
 #include "driverlib/systick.h"
+#include "driverlib/uart.h"
 
 //mp3plib
 #include "uartstdio.h"
@@ -14,31 +15,43 @@
 #include "common.h"
 #include "chrono.h"
 
-#define VERSION "0.02"
+#define VERSION "0.03"
 
-/* void UART_Init()
+//*****************************************************************************
+//
+// Configure the UART and its pins.  This must be called before UARTprintf().
+//
+//*****************************************************************************
+void
+ConfigureUART(void)
 {
-	
-	// Os pinos da UART0 são partilhados com o ICDI. Em teoria, o ICDI deveria fazer match á frequencia da UART
-	// colocada aqui mas pelos vistos não é esse o caso. 
-	// Tenho 2 possíveis soluções para o problema dos caracteres marados. Ou meto um delay(1000) algures antes
-	// de usar a UART pela primeira vez (mas depois de configurada), ou então tento usar a UART1 a ver se dá
-	// para comunicar com o putty.
-	
+    //
+    // Enable the GPIO Peripheral used by the UART.
+    //
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+    //
+    // Enable UART0
+    //
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+
+    //
+    // Configure GPIO Pins for UART mode.
+    //
     GPIOPinConfigure(GPIO_PA0_U0RX);
     GPIOPinConfigure(GPIO_PA1_U0TX);
     GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-	
-	//arg0 - UART Port
-	//arg1 - Baud rate
-	//arg2 - SrcClock
-    UARTStdioConfig(0, 115200, 16000000);	//Obtained from the example "hello.c".
-	
-	//UARTStdioInit(0);
-    UARTprintf("Welcome to the Varuna MP3 Player v0.2 Project!\n");
-	UARTprintf("----------------------------------------------\n\n");
-} */
+
+    //
+    // Use the internal 16MHz oscillator as the UART clock source.
+    //
+    UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
+
+    //
+    // Initialize the UART for console I/O.
+    //
+    UARTStdioConfig(0, 115200, 16000000);
+}
 
 //*****************************************************************************
 //
@@ -133,11 +146,18 @@ void rainbow_test()
 int main()
 {
 	//Configure System Clock at 50 MHz
-	//To run at 80MHz use SYSCTL_SYSDIV_2_5
+	// To run at 80MHz use SYSCTL_SYSDIV_2_5
 	//SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
-	//To run at 50MHz use SYSCTL_SYSDIV_4
+	// To run at 50MHz use SYSCTL_SYSDIV_4
 	SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
 
+	//
+    // Initialize the UART interface.
+    //
+    ConfigureUART();
+
+    UARTprintf("\033[2JBit banding...\n");
+	
 	LCD_Init();
 
 	LCD_On();
