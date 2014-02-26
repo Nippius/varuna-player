@@ -12,8 +12,6 @@
 //mp3plib
 #include "common.h"
 #include "lcd.h"
-#include "chrono.h"
-#include "uartstdio.h"
 
 //Libc (?)
 #include <math.h>
@@ -81,7 +79,6 @@ void WriteCommand(uint16_t cmd)
 		
 	WR(DISABLE);
 	WR(ENABLE);							//Write the data to RAM
-	//CHRONO_Delay_1ms(1);
 }
 
 void WriteData(uint16_t data)
@@ -90,7 +87,6 @@ void WriteData(uint16_t data)
 
 	TransferToOutputPins(data);			//Transfer data
 	WR(DISABLE);				
-	//CHRONO_Delay_1ms(1);
 	WR(ENABLE);							//Write the data to RAM
 }
 
