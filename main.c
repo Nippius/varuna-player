@@ -151,19 +151,24 @@ int main()
 	// To run at 50MHz use SYSCTL_SYSDIV_4
 	SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
 
-	//
-    // Initialize the UART interface.
-    //
     ConfigureUART();
-
-    UARTprintf("\033[2JBit banding...\n");
+	
+	UARTprintf("*** Welcome to Varuna MP3 Player version %s ***\n", VERSION);
+	
+	UARTprintf("CPU core frequency: %d MHz\n", SysCtlClockGet());
+	
+    UARTprintf("Initializing LCD..\n");
 	
 	LCD_Init();
 
+	UARTprintf("Initiate LCD On sequence..\n");
+	
 	LCD_On();
 
+	UARTprintf("Activating LCD backlight..\n");
+	
 	LCD_BackLight(ENABLE);
-
+	
 	LCD_Fill(BLACK);
 	
 	LCD_Text(VERSION,35, 20, 16, GREEN, BLACK);
