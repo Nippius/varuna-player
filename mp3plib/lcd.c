@@ -12,6 +12,7 @@
 //mp3plib
 #include "common.h"
 #include "lcd.h"
+#include "chrono.h"
 
 //Libc (?)
 #include <math.h>
