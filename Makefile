@@ -80,13 +80,23 @@ FLASHER = "C:/Program Files (x86)/Texas Instruments/Stellaris/LM Flash Programme
 FLASHER_FLAGS = -q ek-lm4f120xl -r
 
 # OpenOCD path.
-# Set a relative or absolute path to the upload tool program.
-# Assuming OpenOCD install path = C:\TivaC\OpenOCD
-OPENOCD_PATH = ../../../../../../TivaC/OpenOCD
-# OpenOCD executable (remove -x64 for 32bit binary)
-OPENOCD = ${OPENOCD_PATH}/bin-x64/openocd-x64-0.7.0.exe
-# Flags for OpenOCD
-OPENOCD_FLAGS = -f ${OPENOCD_PATH}/scripts/board/${OPENOCD_BOARD_CFG}
+# Set a relative or absolute path to the debug tool program.
+
+# %SystemRoot% is only defined in Windows systems so we can
+# use this as crude way to detect the operating system
+ifdef SystemRoot
+	# Assuming OpenOCD install path = C:\TivaC\OpenOCD
+	OPENOCD_PATH = ../../../../../../TivaC/OpenOCD
+	# OpenOCD executable (remove -x64 for 32bit binary)
+	OPENOCD = ${OPENOCD_PATH}/bin-x64/openocd-x64-0.7.0.exe
+	# Flags for OpenOCD
+	OPENOCD_FLAGS = -f ${OPENOCD_PATH}/scripts/board/${OPENOCD_BOARD_CFG}
+else
+	OPENOCD =  openocd
+	OPENOCD_FLAGS = -f /usr/share/openocd/scripts/board/${OPENOCD_BOARD_CFG}
+endif
+
+
 # OpenOCD config file for the Stellaries Lauchpad board
 OPENOCD_BOARD_CFG = ek-lm4f120xl.cfg
 
