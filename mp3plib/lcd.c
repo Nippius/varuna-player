@@ -16,7 +16,7 @@
 
 //Libc (?)
 #include <math.h>
-#include <String.h>
+#include <string.h>
 
 
 /************************************************************************************/
@@ -24,7 +24,7 @@
 /************************************************************************************/
 
 void Reset(uint8_t state)
-{	
+{
 	if(state == ENABLE)
 	{
 		GPIOPinWrite(GPIO_PORTF_BASE, LCD_REST, ~LCD_REST);
@@ -68,16 +68,16 @@ void TransferToOutputPins(uint16_t values)
 {
 	//Important. values must be shifted right 8 bits before aplying the mask! (stupid bug...)
 	GPIOPinWrite(GPIO_PORTB_BASE, PORT_B_BITS, ((values>>8)&PORT_B_BITS));	//Write high bits
-	GPIOPinWrite(GPIO_PORTE_BASE, PORT_E_BITS, (PORT_E_BITS&values));		//Write low bits to PORT E	
+	GPIOPinWrite(GPIO_PORTE_BASE, PORT_E_BITS, (PORT_E_BITS&values));		//Write low bits to PORT E
 	GPIOPinWrite(GPIO_PORTD_BASE, PORT_D_BITS, (PORT_D_BITS&values));		//Write remaining bits to PORT D
 }
 
 void WriteCommand(uint16_t cmd)
 {
 	RS(REG_SET_COMMAND);
-	
+
 	TransferToOutputPins(cmd);			//Transfer data
-		
+
 	WR(DISABLE);
 	WR(ENABLE);							//Write the data to RAM
 }
@@ -87,7 +87,7 @@ void WriteData(uint16_t data)
 	RS(REG_SET_DATA);
 
 	TransferToOutputPins(data);			//Transfer data
-	WR(DISABLE);				
+	WR(DISABLE);
 	WR(ENABLE);							//Write the data to RAM
 }
 
@@ -305,7 +305,7 @@ const char FONT_16x16[3040]  = {
 void LCD_Init()
 {
     //
-    // Enable Peripheral Clocks 
+    // Enable Peripheral Clocks
     //
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
@@ -316,7 +316,7 @@ void LCD_Init()
     // Enable port PB0 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_0);
-	
+
 	//
     // Enable port PB1 for GPIOOutput
     //
@@ -326,17 +326,17 @@ void LCD_Init()
     // Enable port PB2 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_2);
-	
+
     //
     // Enable port PB3 for GPIOOutput
     //
-    GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_3);	
-	 
+    GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_3);
+
 	//
     // Enable port PB4 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_4);
-	
+
 	//
     // Enable port PB5 for GPIOOutput
     //
@@ -346,7 +346,7 @@ void LCD_Init()
     // Enable port PB6 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_6);
-	
+
     //
     // Enable port PB7 for GPIOOutput
     //
@@ -366,17 +366,17 @@ void LCD_Init()
     // Enable port PD6 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_6);
-	
+
     //
     //Now modify the configuration of the pins that we unlocked.
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_7);
-	
+
 	//
     // Enable port PE0 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTE_BASE, GPIO_PIN_0);
-	
+
     //
     // Enable port PE1 for GPIOOutput
     //
@@ -386,17 +386,17 @@ void LCD_Init()
     // Enable port PE2 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTE_BASE, GPIO_PIN_2);
-	
+
     //
     // Enable port PE3 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTE_BASE, GPIO_PIN_3);
-	
+
     //
     // Enable port PE4 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTE_BASE, GPIO_PIN_4);
-	
+
 	//
     // Enable port PE5 for GPIOOutput
     //
@@ -422,7 +422,7 @@ void LCD_Init()
     // Enable port PF1 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1);
-	
+
     //
     // Enable port PF2 for GPIOOutput
     //
@@ -432,7 +432,7 @@ void LCD_Init()
     // Enable port PF3 for GPIOOutput
     //
     GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_3);
-	
+
 	//
     // Enable port PF4 for GPIOOutput
     //
@@ -464,10 +464,10 @@ void LCD_Fill(uint32_t color)
 	uint32_t i,j;
 
 	CS(ENABLE);
-	  
+
 	LCD_Set_Address(0,0,LCD_WIDTH-1,LCD_HEIGHT-1);
 	WriteData(color);
-	
+
 	for(i = 0; i <= LCD_HEIGHT-1; i++)
 	{
 		for(j = 0; j <= LCD_WIDTH-1; j++)
@@ -483,12 +483,12 @@ void LCD_Fill(uint32_t color)
 void LCD_Box(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t color)
 {
 	uint32_t  i,j;
-	
+
 	CS(ENABLE);
-	
+
 	LCD_Set_Address(x1,y1,x2,y2);
 	WriteData(color);
-	
+
 	for(i = y1; i <= y2; i++)
 	{
 		for(j = x1; j <= x2; j++)
@@ -504,10 +504,10 @@ void LCD_Box(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t color)
 void LCD_Dot(uint32_t x, uint32_t y, uint32_t color)
 {
 	CS(ENABLE);
-	
+
 	LCD_Set_Address(x,y,x,y);
 	WriteData(color);
-	
+
 	CS(DISABLE);
 }
 
@@ -532,7 +532,7 @@ void LCD_Char(char C, uint32_t x, uint32_t y, char DimFont, uint32_t Fcolor, uin
 		}
 
 		CS(ENABLE);
-		 
+
 		LCD_Set_Address(x,y,x+7,y+7);
 		for(i = 0; i <= 7; i++)
 		{
@@ -599,14 +599,14 @@ void LCD_Image(uint32_t pos_x, uint32_t pos_y, uint32_t dim_x, uint32_t dim_y, c
     uint32_t x, y;
 
     CS(ENABLE);
-	
+
     LCD_Set_Address(pos_x, pos_y, pos_x + dim_x - 1, pos_y + dim_y - 1);
     for(y = pos_y; y < (pos_y + dim_y); y++ ) {
         for(x = pos_x; x < (pos_x + dim_x); x++ ) {
 			WriteData(*picture++);
 		}
 	}
-	
+
 	CS(DISABLE);
 }
 
@@ -774,18 +774,18 @@ void LCD_On()
     CHRONO_Delay_1ms(15);
     Reset(DISABLE);
     CHRONO_Delay_1ms(15);
-	
+
 	CS(ENABLE);
-	
+
 	// set DISPCTRL at 0021h (GON = 1, DTE = 0, D1 = 0, D0 = 1)
     WriteRegister( DISPCTRL, 0x0021 );
-    
+
     // set OSCSTART at 0001h (OSCEN = 1)
     WriteRegister( OSCSTART, 0x0001 );
-    
+
     // set DISPCTRL at 0023h (GON = 1, DTE = 0, D1 = 1, D0 = 1)
     WriteRegister( DISPCTRL, 0x0023 );
-    
+
     // set SLEEPMOD at 0000h = exit sleep mode
     WriteRegister( SLEEPMOD, 0x0000 );
 
@@ -796,7 +796,7 @@ void LCD_On()
     WriteRegister( DISPCTRL, 0x0033 );
 
     // entry mode setting
-    // set ENTRYMOD at 0x6830 
+    // set ENTRYMOD at 0x6830
     WriteRegister( ENTRYMOD, 0x6830 );
 
     // LCD drive AC setting
@@ -820,10 +820,10 @@ void LCD_On()
     WriteRegister( FRAMFREQ, 0xE000 );
 */
     //set the RAM register for writing
-    WriteCommand(RAMDATRW); 
-    
+    WriteCommand(RAMDATRW);
+
     // display ON, start to write RAM
-	
+
 	CS(DISABLE);
 }
 
@@ -841,17 +841,17 @@ void LCD_Off()	//Por testar!
 {
 	//Display Off
 	WriteRegister(DISPCTRL, 0x0000);
-	
+
 	//Oscilator Off
 	WriteRegister(OSCSTART, 0x0000);
-	
+
 	//Enter sleep mode
 	WriteRegister(SLEEPMOD, 0x0001);
-	
+
 	//Wait untir VGH < 5v
-	
+
 	//Remove power from Vddext and Vci then Vddio
-	
+
 	//Display off
 }
 

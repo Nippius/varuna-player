@@ -21,7 +21,7 @@ FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 
 # Stellarisware path
 #Assuming Stellaris install path=C:\Stellaris\TivaWare and using cygwin
-TIVAWARE_PATH=../../../../../../../TivaC/TivaWare/
+TIVAWARE_PATH=../../TivaWare/
 
 # Program name definition for ARM GNU C compiler.
 CC = ${PREFIX_ARM}-gcc

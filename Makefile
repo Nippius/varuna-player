@@ -13,7 +13,7 @@ PREFIX_ARM = arm-none-eabi
 
 # old part number for stelarisware
 # PART = LM4F120H5QR
-# New part number for TivaWare 
+# New part number for TivaWare
 PART = TM4C1233H6PM
 CPU = -mcpu=cortex-m4
 FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
@@ -33,7 +33,7 @@ MP3PLIB_PATH = mp3plib/
 
 # TivaCware path
 # Assuming TivaC install path=C:\TivaC\StellariesWare and using cygwin
-TIVAWARE_PATH = ../../../../../../TivaC/TivaWare/
+TIVAWARE_PATH = ../TivaWare/
 
 #==============================================================================
 # Compiler stuff
@@ -75,18 +75,18 @@ LIBM_PATH = ${shell ${CC} ${CFLAGS} -print-file-name=libm.a}
 
 # Uploader tool path.
 # Set a relative or absolute path to the upload tool program.
-FLASHER = "C:/Program Files (x86)/Texas Instruments/Stellaris/LM Flash Programmer/lmflash" 
+FLASHER = "C:/Program Files (x86)/Texas Instruments/Stellaris/LM Flash Programmer/lmflash"
 # Flags for the uploader program.
 FLASHER_FLAGS = -q ek-lm4f120xl -r
 
 # OpenOCD path.
 # Set a relative or absolute path to the upload tool program.
 # Assuming OpenOCD install path = C:\TivaC\OpenOCD
-OPENOCD_PATH = ../../../../../../TivaC/OpenOCD/
+OPENOCD_PATH = ../../../../../../TivaC/OpenOCD
 # OpenOCD executable (remove -x64 for 32bit binary)
-OPENOCD = ${OPENOCD_PATH}bin-x64/openocd-x64-0.7.0.exe
+OPENOCD = ${OPENOCD_PATH}/bin-x64/openocd-x64-0.7.0.exe
 # Flags for OpenOCD
-OPENOCD_FLAGS = -f ${OPENOCD_PATH}scripts/board/${OPENOCD_BOARD_CFG}
+OPENOCD_FLAGS = -f ${OPENOCD_PATH}/scripts/board/${OPENOCD_BOARD_CFG}
 # OpenOCD config file for the Stellaries Lauchpad board
 OPENOCD_BOARD_CFG = ek-lm4f120xl.cfg
 
