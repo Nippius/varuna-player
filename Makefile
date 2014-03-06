@@ -82,9 +82,9 @@ FLASHER_FLAGS = -q ek-lm4f120xl -r
 # OpenOCD path.
 # Set a relative or absolute path to the debug tool program.
 
-# %SystemRoot% is only defined in Windows systems so we can
+# %OS% is only defined in Windows systems so we can
 # use this as crude way to detect the operating system
-ifdef SystemRoot
+ifdef OS
 	# Assuming OpenOCD install path = C:\TivaC\OpenOCD
 	OPENOCD_PATH = ../../../../../../TivaC/OpenOCD
 	# OpenOCD executable (remove -x64 for 32bit binary)
