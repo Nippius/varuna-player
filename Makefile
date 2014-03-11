@@ -31,8 +31,7 @@ FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 # MP3PlayerLib path
 MP3PLIB_PATH = mp3plib/
 
-# TivaCware path
-# Assuming TivaC install path=C:\TivaC\StellariesWare and using cygwin
+# TivaWare path
 TIVAWARE_PATH = ../TivaWare/
 
 #==============================================================================
@@ -86,13 +85,13 @@ FLASHER_FLAGS = -q ek-lm4f120xl -r
 # use this as crude way to detect the operating system
 ifdef OS
 	# Assuming OpenOCD install path = C:\TivaC\OpenOCD
-	OPENOCD_PATH = ../../../../../../TivaC/OpenOCD
+	OPENOCD_PATH = ../OpenOCD
 	# OpenOCD executable (remove -x64 for 32bit binary)
 	OPENOCD = ${OPENOCD_PATH}/bin-x64/openocd-x64-0.7.0.exe
 	# Flags for OpenOCD
 	OPENOCD_FLAGS = -f ${OPENOCD_PATH}/scripts/board/${OPENOCD_BOARD_CFG}
 else
-	OPENOCD =  openocd
+	OPENOCD = openocd
 	OPENOCD_FLAGS = -f /usr/share/openocd/scripts/board/${OPENOCD_BOARD_CFG}
 endif
 
