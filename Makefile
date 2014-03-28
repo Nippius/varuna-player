@@ -1,4 +1,13 @@
 #==============================================================================
+#
+#	Copyright © 2014 Tiago Costa <nippius+github@gmail.com>
+#	This work is free. You can redistribute it and/or modify it under the
+#	terms of the Do What The Fuck You Want To Public License, Version 2,
+#	as published by Sam Hocevar. See the COPYING file for more details.
+#
+#==============================================================================
+
+#==============================================================================
 #           Cross compiling toolchain / tools specifications
 #==============================================================================
 
@@ -31,8 +40,7 @@ FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 # MP3PlayerLib path
 MP3PLIB_PATH = mp3plib/
 
-# TivaCware path
-# Assuming TivaC install path=C:\TivaC\StellariesWare and using cygwin
+# TivaWare path
 TIVAWARE_PATH = ../TivaWare/
 
 #==============================================================================
@@ -80,13 +88,23 @@ FLASHER = "C:/Program Files (x86)/Texas Instruments/Stellaris/LM Flash Programme
 FLASHER_FLAGS = -q ek-lm4f120xl -r
 
 # OpenOCD path.
-# Set a relative or absolute path to the upload tool program.
-# Assuming OpenOCD install path = C:\TivaC\OpenOCD
-OPENOCD_PATH = ../../../../../../TivaC/OpenOCD
-# OpenOCD executable (remove -x64 for 32bit binary)
-OPENOCD = ${OPENOCD_PATH}/bin-x64/openocd-x64-0.7.0.exe
-# Flags for OpenOCD
-OPENOCD_FLAGS = -f ${OPENOCD_PATH}/scripts/board/${OPENOCD_BOARD_CFG}
+# Set a relative or absolute path to the debug tool program.
+
+# %OS% is only defined in Windows systems so we can
+# use this as crude way to detect the operating system
+ifdef OS
+	# Assuming OpenOCD install path = C:\TivaC\OpenOCD
+	OPENOCD_PATH = ../OpenOCD
+	# OpenOCD executable (remove -x64 for 32bit binary)
+	OPENOCD = ${OPENOCD_PATH}/bin-x64/openocd-x64-0.7.0.exe
+	# Flags for OpenOCD
+	OPENOCD_FLAGS = -f ${OPENOCD_PATH}/scripts/board/${OPENOCD_BOARD_CFG}
+else
+	OPENOCD = openocd
+	OPENOCD_FLAGS = -f /usr/share/openocd/scripts/board/${OPENOCD_BOARD_CFG}
+endif
+
+
 # OpenOCD config file for the Stellaries Lauchpad board
 OPENOCD_BOARD_CFG = ek-lm4f120xl.cfg
 
